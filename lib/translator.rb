@@ -1,7 +1,15 @@
-# require modules here
+require 'yaml'
 
-def load_library
-  # code goes here
+def load_library(file_path)
+  library = {"get_emoticon" => {}, "get_meaning" => {}}
+  YAML.load_file(file_path).each do |emotion, array|
+    english_emoticon = array[0] 
+    japanese_emoticon = array[1]
+  
+  library["get_meaning"][japanese_emoticon] = emotion
+  library["get_emoticon"][english_emoticon] = japanese_emoticon
+  end 
+  library
 end
 
 def get_japanese_emoticon
